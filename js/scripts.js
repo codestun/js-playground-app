@@ -1,5 +1,6 @@
 // Array of Albums taken from Spotify API
 let albums = [
+  // album objects
   {
     name: "1989",
     artist: "Taylor Swift",
@@ -12,14 +13,14 @@ let albums = [
     artist: "Eminem",
     album_type: "Hip-Hop",
     release_date_precision: "2002-05-28",
-    tracks: ["White America", "Cleanin' Out My Closet", "Without Me", "Sing for the Moment"]
+    tracks: ["White America", "Cleanin' Out My Closet", "Business", "White America", "Superman", "Say Goodbye Hollywoood", "Say What You Say", "Without Me", "Sing for the Moment"]
   },
   {
     name: "Hybrid Theory",
     artist: "Linkin Park",
     album_type: "Alternative",
     release_date_precision: "2000-10-24",
-    tracks: ["Papercut", "One Step Closer", "With You", "Crawling"]
+    tracks: ["Papercut", "One Step Closer", "With You", "Points of Authority", "Crawling", "Runaway", "By Myself", "In The End"]
   },
   {
     name: "Bad",
