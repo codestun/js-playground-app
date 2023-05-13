@@ -66,7 +66,13 @@ let albums = [
   }
 ];
 
+// Start of container and heading
+document.write(`<div class="container"><h1>Album Names and Track Counts</h1>`);
+
 // Loop through albums and print album name and track count
 for (let i = 0; i < albums.length; i++) {
   document.write(`<p>${albums[i].name} - ${albums[i].tracks.length} tracks</p>`);
 }
+
+// End of container
+document.write(`</div>`);

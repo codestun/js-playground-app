@@ -1,0 +1,75 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 2 version
+*/
+
+:root {
+  /* colors */
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --tertiary-color: #0081a1;
+
+  /* headings */
+  --h1: 34px;
+  --h2: 26px;
+  --h3: 22px;
+  --h4: 18px;
+  --h5: 14px;
+  --h6: 10px;
+
+  /* body */
+  --font-family: 'Roboto';
+  --line-height: 1.7rem;
+  --normal-font: 400;
+  --medium-font: 500;
+  --bold-font: 700;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: var(--normal-font);
+  font-size: 18px;
+  line-height: var(--line-height);
+  background-color: var(--primary-color);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--bold-font);
+}
+
+h1 {
+  font-size: var(--h1);
+  line-height: 1.4;
+}
+
+h2 {
+  font-size: var(--h2);
+}
+
+h3 {
+  font-size: var(--h3);
+}
+
+ul,
+li {
+  padding: 0;
+  list-style-type: none;
+}
+
+* {
+box-sizing: border-box;
+}
+
+.container {
+  display: block;
+  width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  text-align: center;
+  opacity: 1.2;
+  background-color: var(--secondary-color);
+}
