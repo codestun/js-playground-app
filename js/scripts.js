@@ -74,5 +74,22 @@ for (let i = 0; i < albums.length; i++) {
   document.write(`<p>${albums[i].name} - ${albums[i].tracks.length} tracks</p>`);
 }
 
+// Variables to track the album with the most tracks
+let maxTracks = 9;
+let albumWithMaxTracks = '';
+
+// Find the album with the maximum number of tracks
+for (let i = 0; i < albums.length; i++) {
+  if (albums[i].tracks && albums[i].tracks.length > maxTracks) {
+    maxTracks = albums[i].tracks.length;
+    albumWithMaxTracks = albums[i].name;
+  }
+}
+
+// Check if there is an album with more tracks and print the result
+if (albumWithMaxTracks) {
+  document.write(`<br>Wow, the album <strong>"${albumWithMaxTracks}"</strong> has the most tracks with a count of <strong>${maxTracks}</strong>!`);
+}
+
 // End of container
 document.write(`</div>`);
