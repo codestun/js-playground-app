@@ -65,3 +65,8 @@ let albums = [
     tracks: ["Rolling in the Deep", "Rumour Has It", "Turning Tables", "Someone Like You"]
   }
 ];
+
+// Loop through albums and print album name and track count
+for (let i = 0; i < albums.length; i++) {
+  document.write(`<p>${albums[i].name} - ${albums[i].tracks.length} tracks</p>`);
+}
