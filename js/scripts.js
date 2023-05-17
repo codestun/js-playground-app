@@ -88,19 +88,21 @@ let albumRepository = (function () {
 document.write(`<div class="container"><h1>Album Names and Track Counts</h1>`);
 
 // Loop through albums and print album name and track count
-albums.forEach((album) => document.write(`<p>${album.name} - ${album.tracks.length} tracks</p>`));
+albumRepository.getALL().forEach((album) => document.write(`<p>${album.name} - ${album.tracks.length} tracks</p>`));
 
 // Variables to track the album with the most tracks
 let maxTracks = 9;
 let albumWithMaxTracks = '';
 
 // Find the album with the maximum number of tracks
-for (let i = 0; i < albums.length; i++) {
-  if (albums[i].tracks && albums[i].tracks.length > maxTracks) {
-    maxTracks = albums[i].tracks.length;
-    albumWithMaxTracks = albums[i].name;
+albumRepository.getALL()
+
+albumRepository.getALL().forEach(function(album) {
+  if (album.tracks && album.tracks.length > maxTracks) {
+    maxTracks = album.tracks.length;
+    albumWithMaxTracks = album.name;
   }
-}
+});
 
 // Check if there is an album with more tracks and print the result
 if (albumWithMaxTracks) {
