@@ -70,9 +70,7 @@ let albums = [
 document.write(`<div class="container"><h1>Album Names and Track Counts</h1>`);
 
 // Loop through albums and print album name and track count
-for (let i = 0; i < albums.length; i++) {
-  document.write(`<p>${albums[i].name} - ${albums[i].tracks.length} tracks</p>`);
-}
+albums.forEach((album) => document.write(`<p>${album.name} - ${album.tracks.length} tracks</p>`));
 
 // Variables to track the album with the most tracks
 let maxTracks = 9;
