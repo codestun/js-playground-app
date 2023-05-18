@@ -73,11 +73,7 @@ let albumRepository = (function () {
     return albums;
   }
   function add(album) {
-    if (typeof album === 'object') {
-      albums.push(album);
-    } else {
-      console.log('Invalid data type. Only objects can be added to albums.');
-    }
+    typeof album === "object" ? albums.push(album) : console.log("Invalid data type. Only objects can be added to albums.");
   }
 
   return {
