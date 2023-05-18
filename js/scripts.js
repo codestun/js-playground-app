@@ -73,7 +73,11 @@ let albumRepository = (function () {
     return albums;
   }
   function add(album) {
-    albums.push(album);
+    if (typeof album === 'object') {
+      albums.push(album);
+    } else {
+      console.log('Invalid data type. Only objects can be added to albums.');
+    }
   }
 
   return {
@@ -97,7 +101,7 @@ let albumWithMaxTracks = '';
 // Find the album with the maximum number of tracks
 albumRepository.getALL()
 
-albumRepository.getALL().forEach(function(album) {
+albumRepository.getALL().forEach(function (album) {
   if (album.tracks && album.tracks.length > maxTracks) {
     maxTracks = album.tracks.length;
     albumWithMaxTracks = album.name;
