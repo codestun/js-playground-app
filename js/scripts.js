@@ -77,6 +77,12 @@ let albumRepository = (function () {
     typeof album === "object" ? albums.push(album) : console.log("Invalid data type. Only objects can be added to albums.");
   }
 
+  function addEventListener(button, album) {
+    button.addEventListener('click', function () {
+      showDetails(album);
+    });
+  }
+
   function addListItem(album) {
     let albumList = document.querySelector('.album-list');
     let listalbum = document.createElement('li');
@@ -85,6 +91,9 @@ let albumRepository = (function () {
     button.classList.add('button-class');
     listalbum.appendChild(button);
     albumList.appendChild(listalbum);
+
+    // Call the new function to add event listener
+    addEventListener(button, album);
   }
 
   function showDetails(album) {
@@ -94,8 +103,9 @@ let albumRepository = (function () {
   return {
     getALL: getALL,
     add: add,
+    addEventListener: addEventListener,
     addListItem: addListItem,
-    showDetails: showDetails
+    showDetails: showDetails,
   }
 
   //IIFE END
