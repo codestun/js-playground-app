@@ -72,37 +72,31 @@ let albumRepository = (function () {
   function getALL() {
     return albums;
   }
+
   function add(album) {
     typeof album === "object" ? albums.push(album) : console.log("Invalid data type. Only objects can be added to albums.");
   }
 
+  function addListItem(album) {
+    let albumList = document.querySelector('.album-list');
+    let listalbum = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = album.name;
+    button.classList.add('button-class');
+    listalbum.appendChild(button);
+    albumList.appendChild(listalbum);
+  }
+
   return {
     getALL: getALL,
-    add: add
+    add: add,
+    addListItem: addListItem
   }
 
   //IIFE END
 })()
 
-// Start of container and heading
-document.write(`<div class="container"><h1>Album Names and Track Counts</h1>`);
-
-// Variables to track the album with the most tracks
-let maxTracks = 9;
-let albumWithMaxTracks = '';
-
-// Loop through albums and print album name and track count
-albumRepository.getALL().forEach((album) => {
-  document.write(`<p>${album.name} - ${album.tracks.length} tracks</p>`)
-  if (album.tracks && album.tracks.length > maxTracks) {
-    maxTracks = album.tracks.length;
-    albumWithMaxTracks = album.name;
-  }
+// Loop through albums and print album name
+albumRepository.getALL().forEach(function (album) {
+  albumRepository.addListItem(album);
 });
-// Check if there is an album with more tracks and print the result
-if (albumWithMaxTracks) {
-  document.write(`<br>Wow, the album <strong>"${albumWithMaxTracks}"</strong> has the most tracks with a count of <strong>${maxTracks}</strong>!`);
-}
-
-// End of container
-document.write(`</div>`);
