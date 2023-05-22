@@ -87,10 +87,15 @@ let albumRepository = (function () {
     albumList.appendChild(listalbum);
   }
 
+  function showDetails(album) {
+    console.log(`${album.name}`);
+  }
+
   return {
     getALL: getALL,
     add: add,
-    addListItem: addListItem
+    addListItem: addListItem,
+    showDetails: showDetails
   }
 
   //IIFE END
@@ -99,4 +104,5 @@ let albumRepository = (function () {
 // Loop through albums and print album name
 albumRepository.getALL().forEach(function (album) {
   albumRepository.addListItem(album);
+  albumRepository.showDetails(album);
 });
