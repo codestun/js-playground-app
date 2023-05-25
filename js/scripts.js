@@ -1,76 +1,28 @@
 // Immediately Invoked Function Expression (IIFE) assigned to new variable
 let albumRepository = (function () {
 
-  // Array of Albums taken from Spotify API
-  let albums = [
-    // album objects
-    {
-      name: "1989",
-      artist: "Taylor Swift",
-      album_type: "Pop",
-      release_date_precision: "2014-10-27",
-      tracks: ["Welcome to New York", "Blank Space", "Style", "Out of the Woods"]
-    },
-    {
-      name: "The Eminem Show",
-      artist: "Eminem",
-      album_type: "Hip-Hop",
-      release_date_precision: "2002-05-28",
-      tracks: ["White America", "Cleanin' Out My Closet", "Business", "White America", "Superman", "Say Goodbye Hollywoood", "Say What You Say", "Without Me", "Sing for the Moment"]
-    },
-    {
-      name: "Hybrid Theory",
-      artist: "Linkin Park",
-      album_type: "Alternative",
-      release_date_precision: "2000-10-24",
-      tracks: ["Papercut", "One Step Closer", "With You", "Points of Authority", "Crawling", "Runaway", "By Myself", "In The End"]
-    },
-    {
-      name: "Bad",
-      artist: "Michael Jackson",
-      album_type: "Pop",
-      release_date_precision: "1987-08-31",
-      tracks: ["Bad", "The Way You Make Me Feel", "Man in the Mirror", "Smooth Criminal"]
-    },
-    {
-      name: "Between Two Shores",
-      artist: "Glen Hansard",
-      album_type: "Folk",
-      release_date_precision: "2018-01-19",
-      tracks: ["Roll On Slow", "Why Woman", "Wheels on Fire", "Wreckless Heart", "Movin' On", "Setting Forth", "Lucky Man", "One of Us Must Lose", "Your Heart's Not In It", "Time Will Be the Healer"]
-    },
-    {
-      name: "Thriller",
-      artist: "Michael Jackson",
-      album_type: "Pop",
-      release_date_precision: "1982-11-30",
-      tracks: ["Wanna Be Startin' Somethin'", "Thriller", "Beat It", "Billie Jean"]
-    },
-    {
-      name: "Rumours",
-      artist: "Fleetwood Mac",
-      album_type: "Rock",
-      release_date_precision: "1977-02-04",
-      tracks: ["Second Hand News", "Dreams", "Never Going Back Again", "Don't Stop"]
-    },
-    {
-      name: "Back in Black",
-      artist: "AC/DC",
-      album_type: "Rock",
-      release_date_precision: "1980-07-25",
-      tracks: ["Hells Bells", "Shoot to Thrill", "Back in Black", "You Shook Me All Night Long"]
-    },
-    {
-      name: "21",
-      artist: "Adele",
-      album_type: "Pop",
-      release_date_precision: "2011-01-24",
-      tracks: ["Rolling in the Deep", "Rumour Has It", "Turning Tables", "Someone Like You"]
-    }
-  ]
+  // album objects
+  let albums = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function getALL() {
     return albums;
+  }
+
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let album = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(album);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
   }
 
   function add(album) {
@@ -102,6 +54,7 @@ let albumRepository = (function () {
 
   return {
     getALL: getALL,
+    loadList: loadList,
     add: add,
     addEventListener: addEventListener,
     addListItem: addListItem,
@@ -111,8 +64,12 @@ let albumRepository = (function () {
   //IIFE END
 })()
 
-// Loop through albums and print album name
-albumRepository.getALL().forEach(function (album) {
-  albumRepository.addListItem(album);
-  albumRepository.showDetails(album);
+// Now the data is loaded!
+albumRepository.loadList().then(function () {
+
+  // Loop through albums and print album name
+  albumRepository.getALL().forEach(function (album) {
+    albumRepository.addListItem(album);
+    albumRepository.showDetails(album);
+  });
 });
