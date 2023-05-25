@@ -5,10 +5,16 @@ let albumRepository = (function () {
   let albums = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
+
+  function add(album) {
+    typeof album === "object" ? albums.push(album) : console.log("Invalid data type. Only objects can be added to albums.");
+  }
+
   function getALL() {
     return albums;
   }
 
+  // Fetch data from the API
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -25,8 +31,20 @@ let albumRepository = (function () {
     })
   }
 
-  function add(album) {
-    typeof album === "object" ? albums.push(album) : console.log("Invalid data type. Only objects can be added to albums.");
+  // Load the detailed data for a given album
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+
+      // Add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
   }
 
   function addEventListener(button, album) {
@@ -48,14 +66,18 @@ let albumRepository = (function () {
     addEventListener(button, album);
   }
 
+  // Execute loadDetails() after user clicked on an album
   function showDetails(album) {
-    console.log(`${album.name}`);
+    loadDetails(album).then(function () {
+      console.log(album);
+    });
   }
 
   return {
+    add: add,
     getALL: getALL,
     loadList: loadList,
-    add: add,
+    loadDetails: loadDetails,
     addEventListener: addEventListener,
     addListItem: addListItem,
     showDetails: showDetails,
@@ -67,9 +89,8 @@ let albumRepository = (function () {
 // Now the data is loaded!
 albumRepository.loadList().then(function () {
 
-  // Loop through albums and print album name
+  // Loop through albums and print album names
   albumRepository.getALL().forEach(function (album) {
     albumRepository.addListItem(album);
-    albumRepository.showDetails(album);
   });
 });
