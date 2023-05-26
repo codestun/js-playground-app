@@ -1,17 +1,17 @@
 // Immediately Invoked Function Expression (IIFE) assigned to new variable
-let albumRepository = (function () {
+let pokemonRepository = (function () {
 
-  // album objects
-  let albums = [];
+  // pokemon objects
+  let pokemons = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 
-  function add(album) {
-    typeof album === "object" ? albums.push(album) : console.log("Invalid data type. Only objects can be added to albums.");
+  function add(pokemon) {
+    typeof pokemon === "object" ? pokemons.push(pokemon) : console.log("Invalid data type. Only objects can be added to pokemons.");
   }
 
   function getALL() {
-    return albums;
+    return pokemons;
   }
 
   // Fetch data from the API
@@ -20,18 +20,18 @@ let albumRepository = (function () {
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
-        let album = {
+        let pokemon = {
           name: item.name,
           detailsUrl: item.url
         };
-        add(album);
+        add(pokemon);
       });
     }).catch(function (e) {
       console.error(e);
     })
   }
 
-  // Load the detailed data for a given album
+  // Load the detailed data for a given pokemon
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -47,29 +47,29 @@ let albumRepository = (function () {
     });
   }
 
-  function addEventListener(button, album) {
+  function addEventListener(button, pokemon) {
     button.addEventListener('click', function () {
-      showDetails(album);
+      showDetails(pokemon);
     });
   }
 
-  function addListItem(album) {
-    let albumList = document.querySelector('.album-list');
-    let listalbum = document.createElement('li');
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listpokemon = document.createElement('li');
     let button = document.createElement('button');
-    button.innerText = album.name;
+    button.innerText = pokemon.name;
     button.classList.add('button-class');
-    listalbum.appendChild(button);
-    albumList.appendChild(listalbum);
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
 
     // Call the new function to add event listener
-    addEventListener(button, album);
+    addEventListener(button, pokemon);
   }
 
-  // Execute loadDetails() after user clicked on an album
-  function showDetails(album) {
-    loadDetails(album).then(function () {
-      console.log(album);
+  // Execute loadDetails() after user clicked on an pokemon
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
     });
   }
 
@@ -87,10 +87,10 @@ let albumRepository = (function () {
 })()
 
 // Now the data is loaded!
-albumRepository.loadList().then(function () {
+pokemonRepository.loadList().then(function () {
 
-  // Loop through albums and print album names
-  albumRepository.getALL().forEach(function (album) {
-    albumRepository.addListItem(album);
+  // Loop through pokemons and print pokemon names
+  pokemonRepository.getALL().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
   });
 });
