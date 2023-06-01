@@ -94,3 +94,20 @@ pokemonRepository.loadList().then(function () {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+// IIFE Start
+(function () {
+
+  // Function to show the modal
+  function showModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.add('is-visible');
+  }
+
+  // Add event listener to the button with id "show-modal"
+  document.querySelector('#show-modal').addEventListener('click', () => {
+    showModal();
+  });
+
+  //IIFE End
+})();
