@@ -99,14 +99,37 @@ pokemonRepository.loadList().then(function () {
 (function () {
 
   // Function to show the modal
-  function showModal() {
+  function showModal(title, text) {
     let modalContainer = document.querySelector('#modal-container');
+
+    // Clear all existing modal content
+    modalContainer.innerHTML = '';
+
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    // Add the new modal content
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+
+    let contentElement = document.createElement('p');
+    contentElement.innerText = text;
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement);
+    modalContainer.appendChild(modal);
+
     modalContainer.classList.add('is-visible');
   }
 
   // Add event listener to the button with id "show-modal"
   document.querySelector('#show-modal').addEventListener('click', () => {
-    showModal();
+    showModal('Modal title', 'This is the modal content');
   });
 
   //IIFE End
