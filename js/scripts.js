@@ -1,4 +1,4 @@
-// Immediately Invoked Function Expression (IIFE) assigned to new variable
+// Immediately Invoked Function Expression (IIFE)
 let pokemonRepository = (function () {
 
   // pokemon objects
@@ -57,7 +57,7 @@ let pokemonRepository = (function () {
     let pokemonList = document.querySelector('.pokemon-list');
     let listpokemon = document.createElement('li');
     let button = document.createElement('button');
-    button.innerText = pokemon.name;
+    button.innerText = pokemon.name.toUpperCase();
     button.classList.add('button-class');
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
@@ -66,40 +66,14 @@ let pokemonRepository = (function () {
     addEventListener(button, pokemon);
   }
 
-  // Execute loadDetails() after user clicked on an pokemon
+  // Execute loadDetails() after user clicked on a pokemon
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+      showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
     });
   }
-
-  return {
-    add: add,
-    getALL: getALL,
-    loadList: loadList,
-    loadDetails: loadDetails,
-    addEventListener: addEventListener,
-    addListItem: addListItem,
-    showDetails: showDetails,
-  }
-
-  //IIFE END
-})()
-
-// Now the data is loaded!
-pokemonRepository.loadList().then(function () {
-
-  // Loop through pokemons and print pokemon names
-  pokemonRepository.getALL().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
-  });
-});
-
-// IIFE Start
-(function () {
-
   // Function to show the modal
-  function showModal(title, text) {
+  function showModal(name, height, imageUrl) {
     let modalContainer = document.querySelector('#modal-container');
 
     // Clear all existing modal content
@@ -112,25 +86,74 @@ pokemonRepository.loadList().then(function () {
     let closeButtonElement = document.createElement('button');
     closeButtonElement.classList.add('modal-close');
     closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
 
     let titleElement = document.createElement('h1');
-    titleElement.innerText = title;
+
+    // Capitalize the name
+    titleElement.innerText = name.toUpperCase();
+
 
     let contentElement = document.createElement('p');
-    contentElement.innerText = text;
+    contentElement.innerText = `Height: ${height}`;
+
+    let imageElement = document.createElement('img');
+    imageElement.src = imageUrl;
+    imageElement.alt = name;
+
+    // Add css class for styling the img element
+    imageElement.classList.add('modal-image');
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(contentElement);
+    modal.appendChild(imageElement);
     modalContainer.appendChild(modal);
 
     modalContainer.classList.add('is-visible');
+
+    modalContainer.addEventListener('click', (e) => {
+      // Since this is also triggered when clicking INSIDE the modal
+      // We only want to close if the user clicks directly on the overlay
+      let target = e.target;
+      if (target === modalContainer) {
+        hideModal();
+      }
+    });
+
   }
 
-  // Add event listener to the button with id "show-modal"
-  document.querySelector('#show-modal').addEventListener('click', () => {
-    showModal('Modal title', 'This is the modal content');
+  function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    let modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
   });
 
-  //IIFE End
-})();
+  return {
+    add: add,
+    getALL: getALL,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    addEventListener: addEventListener,
+    addListItem: addListItem,
+    showDetails: showDetails,
+    showModal: showModal,
+  }
+
+  //IIFE END
+})()
+
+// The data is loaded!
+pokemonRepository.loadList().then(function () {
+
+  // Loop through pokemons and print pokemon names
+  pokemonRepository.getALL().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+});

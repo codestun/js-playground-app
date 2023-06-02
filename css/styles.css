@@ -69,8 +69,7 @@ li {
 }
 
 .container h1 {
-  margin: 10px;
-  padding: 0 30px;
+  text-align: center;
 }
 
 li {
@@ -80,13 +79,12 @@ li {
 
 .button-class {
   display: block;
-  text-align: center;
+  width: 100%;
   font-size: 17px;
   font-weight: var(--medium-font);
   background-color: var(--tertiary-color);
   border: none;
   padding: 20px 32px;
-  margin: 4px 2px;
 }
 
 #modal-container {
@@ -97,7 +95,7 @@ li {
   position: fixed;
   padding: 20px;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   top: 0;
   left: 0;
   width: 100%;
@@ -131,7 +129,8 @@ li {
 .modal-close {
   float: right;
   -webkit-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+       appearance: none;
   border: 0;
   background: none;
   color: #777;
@@ -144,4 +143,9 @@ li {
 
 .modal p {
   margin-bottom: 0;
+}
+
+.modal-image {
+  display: block;
+  margin: 0 auto;
 }
