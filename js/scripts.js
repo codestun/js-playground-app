@@ -55,12 +55,18 @@ let pokemonRepository = (function () {
 
   function addListItem(pokemon) {
     let pokemonList = document.querySelector('.pokemon-list');
-    let listpokemon = document.createElement('li');
+    let listItem = document.createElement('li');
+    listItem.classList.add('list-group-item');
+
     let button = document.createElement('button');
     button.innerText = pokemon.name.toUpperCase();
-    button.classList.add('button-class');
-    listpokemon.appendChild(button);
-    pokemonList.appendChild(listpokemon);
+    button.classList.add('btn');
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#exampleModal');
+
+    listItem.appendChild(button);
+    pokemonList.appendChild(listItem);
+
 
     // Call the new function to add event listener
     addEventListener(button, pokemon);
