@@ -22,7 +22,6 @@ JavaScript: The project is written in vanilla JavaScript, compatible with modern
 
 Bootstrap: The project uses Bootstrap 4.3.1 for styling and layout. The Bootstrap CSS and JavaScript files are included via CDN links in the HTML file.
 Promise and Fetch Polyfills: The project includes polyfill scripts (promise-polyfill.js and fetch-polyfill.js) to ensure cross-browser compatibility for the fetch API.
-API Used:
 
 - Polyfills
    - [Promise](https://raw.githubusercontent.com/taylorhakes/promise-polyfill/master/dist/polyfill.js)
