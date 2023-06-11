@@ -7,7 +7,7 @@ let pokemonRepository = (function () {
 
 
   function add(pokemon) {
-    typeof pokemon === "object" ? pokemons.push(pokemon) : console.log("Invalid data type. Only objects can be added to pokemons.");
+    typeof pokemon === 'object' ? pokemons.push(pokemon) : console.log('Invalid data type. Only objects can be added to pokemons.');
   }
 
   function getALL() {
